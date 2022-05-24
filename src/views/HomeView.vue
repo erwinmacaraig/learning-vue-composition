@@ -3,10 +3,13 @@
   <div class="home">
   <h3>{{ counterData.title }}:</h3>
     <div>
-    <button @click="decreaseCounter" class="btn">-</button>
-    <span class="counter">{{counterData.count}}</span>
-    <button @click="increaseCounter" class="btn">+</button>
+      <button @click="decreaseCounter(3)" class="btn">-</button>
+      <span class="counter">{{counterData.count}}</span>
+      <button @click="increaseCounter(2)" class="btn">+</button>
     </div>
+
+    <p>This counter is {{oddOrEven}}.</p>
+
     <div class="edit">
       <h4>Edit counter title</h4>
       <input type="text" v-model="counterData.title">
@@ -59,7 +62,7 @@ export default {
  -->
 
 <script setup>
-  import { ref, reactive } from  'vue'
+  import { ref, reactive, computed, watch } from  'vue'
   
   const counter = ref(0)
   const counterTitle = ref('My Counter')
@@ -68,14 +71,26 @@ export default {
     title: 'My Counter'
   })
 
-  const increaseCounter = () => {
+  const oddOrEven = computed(() => {
+    if (counterData.count % 2 === 0){
+      return 'even';
+    }
+    return 'odd';
+  })
+  const increaseCounter = (amount) => {
     counter.value++
-    counterData.count++
+    counterData.count+=amount
   }
-  const decreaseCounter = () => {
+  const decreaseCounter = (amount) => {
     counter.value--
-    counterData.count--
+    counterData.count-=amount
   }
+
+  watch(() => counterData.count, (newValue, oldValue) => {
+    if (newValue >= 20) {
+      alert('Reached limit to trigger watcher')
+    }
+  })
 </script>
 
 <style>
