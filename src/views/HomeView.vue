@@ -62,7 +62,7 @@ export default {
  -->
 
 <script setup>
-  import { ref, reactive, computed, watch } from  'vue'
+  import { ref, reactive, computed, watch, onActivated, onDeactivated } from  'vue'
   
   const counter = ref(0)
   const counterTitle = ref('My Counter')
@@ -90,6 +90,14 @@ export default {
     if (newValue >= 20) {
       alert('Reached limit to trigger watcher')
     }
+  })
+
+  onActivated(() => {
+    console.log('onActivated')
+  })
+
+  onDeactivated(() => {
+    console.log('onDeactivated')
   })
 </script>
 
