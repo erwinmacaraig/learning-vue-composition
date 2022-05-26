@@ -1,7 +1,8 @@
 
 <template>
   <div class="home">
-  <h3>{{ counterData.title }}:</h3>
+    <h2 ref="appTitleRef">{{ appTitle}}</h2>
+    <h3>{{ counterData.title }}:</h3>
     <div>
       <button @click="decreaseCounter(3)" class="btn">-</button>
       <span class="counter">{{counterData.count}}</span>
@@ -62,10 +63,13 @@ export default {
  -->
 
 <script setup>
-  import { ref, reactive, computed, watch, onActivated, onDeactivated } from  'vue'
+  import { ref, reactive, computed, watch, onActivated, onDeactivated, onMounted } from  'vue'
   
   const counter = ref(0)
   const counterTitle = ref('My Counter')
+  const appTitle = 'My Ok Counter'
+
+  const appTitleRef = ref(null)
   const counterData = reactive({
     count: 0,
     title: 'My Counter'
@@ -98,6 +102,10 @@ export default {
 
   onDeactivated(() => {
     console.log('onDeactivated')
+  })
+
+  onMounted(() => {
+    console.log(`The app title is ${appTitleRef.value.offsetWidth} px wide!`)
   })
 </script>
 
