@@ -9,8 +9,7 @@
         <component
           v-if="showModal"
           v-model="showModal"
-          :is="showDarkModals ? ModalDark: Modal"
-          :userData="userData"
+          :is="showDarkModals ? ModalDark: Modal"          
           @hideModal="showModal = false"
         >
             <!-- <template v-slot:title>My New Title</template>  -->
@@ -27,12 +26,7 @@
     import {ref} from 'vue';
     const showModal = ref(false);
     const showDarkModals  = ref(false)
-
-    const props = defineProps({
-        userData: {
-            type: Object
-        }
-    })
+    
 </script>
 
 <style scoped>

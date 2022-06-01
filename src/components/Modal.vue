@@ -9,15 +9,13 @@
                 <slot></slot>
                 <!-- <button @click="$emit('hideModal')">Hide modal</button> -->
                 <button @click="handleButtonClick">Hide Modal</button>
-                 <div>
-                    Username is: {{ userData.username }}
-                 </div>               
+                <div>Username is {{ userData.username }}</div>            
             </div>
         </teleport>
 </template>
 
 <script setup>
-import { useSlots } from 'vue'
+import { useSlots, inject } from 'vue'
 const slots = useSlots()
 // console.log(slots.title())
 const props = defineProps({
@@ -32,10 +30,6 @@ const props = defineProps({
     title: {
         type: String,
         default: 'There is no title specified'
-    },
-    userData: {
-        type: Object,
-
     }
 })
 
@@ -46,6 +40,8 @@ const handleButtonClick = () => {
     // emit('hideModal')
     emit('update:modelValue', false)
 }
+
+const userData = inject('userData')
 </script>
 
 <style scoped>
