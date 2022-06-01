@@ -2,16 +2,13 @@
     <teleport to=".modals-container">
             <div
             v-if="modelValue"
-            class="modal"
+            class="modal-dark"
             >
                 <!-- <h1><slot name="title"></slot></h1> -->
                 <h1>{{title}}</h1>
                 <slot></slot>
                 <!-- <button @click="$emit('hideModal')">Hide modal</button> -->
-                <button @click="handleButtonClick">Hide Modal</button>
-                 <div>
-                    Username is: {{ userData.username }}
-                 </div>               
+                <button @click="handleButtonClick">Hide Modal</button>                
             </div>
         </teleport>
 </template>
@@ -32,10 +29,6 @@ const props = defineProps({
     title: {
         type: String,
         default: 'There is no title specified'
-    },
-    userData: {
-        type: Object,
-
     }
 })
 
@@ -49,8 +42,9 @@ const handleButtonClick = () => {
 </script>
 
 <style scoped>
-.modal {
-        background: beige;
+.modal-dark {
+        background: #333;
+        color: white;
         padding: 10px;
         position: absolute;
         left: 0;
