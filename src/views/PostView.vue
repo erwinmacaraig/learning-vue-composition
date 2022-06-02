@@ -1,8 +1,8 @@
 <script setup>
     import { ref } from 'vue'
-    import { useCounter } from '@/use/useCounter'
-    
-    const {counterData, increaseCounter, oddOrEven } = useCounter()
+    import {useCounterStore} from '@/stores/counter'
+
+    const counter = useCounterStore()
     const posts = ref([
         {
             id: 'id1',
@@ -30,7 +30,7 @@
             <li> <RouterLink to="/postDetail/id3">Post 3</RouterLink> </li> -->
 
         </ul>
-        <div><button @click="increaseCounter(5)" class="counter-button" :class="{'yellow': oddOrEven === 'odd'}">{{counterData.count}}</button></div>
+        <div><button @click="counter.increaseCounter(1)" class="counter-button" :class="{'yellow': counter.oddOrEven === 'odd'}">{{counter.count}}</button></div>
         
     </div>
 </template>

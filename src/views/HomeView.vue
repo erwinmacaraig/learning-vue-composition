@@ -2,104 +2,29 @@
 <template>
   <div class="home">
     <h2 ref="appTitleRef">{{ appTitle}}</h2>
-    <h3>{{ counterData.title }}:</h3>
+    <h3>{{counter.title}}</h3>
     <div>
-      <button @click="decreaseCounter(3)" class="btn">-</button>
-      <span class="counter">{{counterData.count}}</span>
-      <button @click="increaseCounter(2)" class="btn">+</button>
+      <button @click="counter.decreaseCounter(1)" class="btn">-</button>
+      <span class="counter">{{counter.count}}</span>
+      <button @click="counter.increaseCounter(1)" class="btn">+</button>
     </div>
 
-    <p>This counter is {{oddOrEven}}.</p>
+    <p>This counter is {{ counter.oddOrEven }}.</p>
 
     <div class="edit">
       <h4>Edit counter title</h4>
-      <input type="text" v-model="counterData.title">
+      <input type="text" v-model="counter.title">
     </div>
   </div>
 </template>
 
-<!--
-<script>
-  export default {
-    data(){
-      return {
-        counter: 0
-      }
-    },
-    methods: {
-      increaseCounter() {
-        this.counter++
-      },
-      decreaseCounter(){
-        this.counter--
-      }
-    }
-  }
-</script>
--->
-
-<!--
-<script>
-import {ref} from 'vue';
-export default {
-  setup() {
-      const counter = ref(0)
-
-      const increaseCounter = () => {
-        counter.value++
-      }
-      const decreaseCounter = () => {
-        counter.value--
-      }
-
-      return {
-        counter,
-        increaseCounter,
-        decreaseCounter
-      }
-    }
-}  
-</script>
- -->
-
 <script setup>
-  import { ref, reactive, computed, watch, onActivated, onDeactivated, onMounted } from  'vue'
-  import { useCounter } from '../use/useCounter'
-  // const counter = ref(0)
-  // const counterTitle = ref('My Counter')
-  // const appTitle = 'My Ok Counter'
+  import { onActivated, onDeactivated, ref } from  'vue'
+  import {useCounterStore} from '@/stores/counter'
 
-  // const appTitleRef = ref(null)
-  // const counterData = reactive({
-  //   count: 0,
-  //   title: 'My Counter'
-  // })
+  const counter = useCounterStore()
 
-  // const oddOrEven = computed(() => {
-  //   if (counterData.count % 2 === 0){
-  //     return 'even';
-  //   }
-  //   return 'odd';
-  // })
-  // const increaseCounter = (amount) => {
-  //   counter.value++
-  //   counterData.count+=amount
-  // }
-  // const decreaseCounter = (amount) => {
-  //   counter.value--
-  //   counterData.count-=amount
-  // }
-
-  // watch(() => counterData.count, (newValue, oldValue) => {
-  //   if (newValue >= 20) {
-  //     alert('Reached limit to trigger watcher')
-  //   }
-  // })
-
-
-  const { counterData, oddOrEven, increaseCounter, decreaseCounter } = useCounter()
-
-
+  const appTitle = ref('Counter Example')
   onActivated(() => {
     console.log('onActivated')
   })
