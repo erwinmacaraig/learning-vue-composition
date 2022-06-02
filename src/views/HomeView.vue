@@ -64,37 +64,41 @@ export default {
 
 <script setup>
   import { ref, reactive, computed, watch, onActivated, onDeactivated, onMounted } from  'vue'
-  
-  const counter = ref(0)
-  const counterTitle = ref('My Counter')
-  const appTitle = 'My Ok Counter'
+  import { useCounter } from '../use/useCounter'
+  // const counter = ref(0)
+  // const counterTitle = ref('My Counter')
+  // const appTitle = 'My Ok Counter'
 
-  const appTitleRef = ref(null)
-  const counterData = reactive({
-    count: 0,
-    title: 'My Counter'
-  })
+  // const appTitleRef = ref(null)
+  // const counterData = reactive({
+  //   count: 0,
+  //   title: 'My Counter'
+  // })
 
-  const oddOrEven = computed(() => {
-    if (counterData.count % 2 === 0){
-      return 'even';
-    }
-    return 'odd';
-  })
-  const increaseCounter = (amount) => {
-    counter.value++
-    counterData.count+=amount
-  }
-  const decreaseCounter = (amount) => {
-    counter.value--
-    counterData.count-=amount
-  }
+  // const oddOrEven = computed(() => {
+  //   if (counterData.count % 2 === 0){
+  //     return 'even';
+  //   }
+  //   return 'odd';
+  // })
+  // const increaseCounter = (amount) => {
+  //   counter.value++
+  //   counterData.count+=amount
+  // }
+  // const decreaseCounter = (amount) => {
+  //   counter.value--
+  //   counterData.count-=amount
+  // }
 
-  watch(() => counterData.count, (newValue, oldValue) => {
-    if (newValue >= 20) {
-      alert('Reached limit to trigger watcher')
-    }
-  })
+  // watch(() => counterData.count, (newValue, oldValue) => {
+  //   if (newValue >= 20) {
+  //     alert('Reached limit to trigger watcher')
+  //   }
+  // })
+
+
+  const { counterData, oddOrEven, increaseCounter, decreaseCounter } = useCounter()
+
 
   onActivated(() => {
     console.log('onActivated')
@@ -103,10 +107,7 @@ export default {
   onDeactivated(() => {
     console.log('onDeactivated')
   })
-
-  onMounted(() => {
-    console.log(`The app title is ${appTitleRef.value.offsetWidth} px wide!`)
-  })
+  
 </script>
 
 <style>

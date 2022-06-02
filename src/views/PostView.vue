@@ -1,6 +1,8 @@
 <script setup>
     import { ref } from 'vue'
-
+    import { useCounter } from '@/use/useCounter'
+    
+    const {counterData, increaseCounter, oddOrEven } = useCounter()
     const posts = ref([
         {
             id: 'id1',
@@ -28,11 +30,21 @@
             <li> <RouterLink to="/postDetail/id3">Post 3</RouterLink> </li> -->
 
         </ul>
+        <div><button @click="increaseCounter(5)" class="counter-button" :class="{'yellow': oddOrEven === 'odd'}">{{counterData.count}}</button></div>
+        
     </div>
 </template>
 
 <style scoped>
     ul {
         margin-bottom: 30px;
+    }
+    .counter-button {
+        font-size: 60px;
+        width: 100%;
+        background-color: pink;
+    }
+    .counter-button.yellow {
+        background-color: yellow;
     }
 </style>
